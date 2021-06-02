@@ -15,27 +15,29 @@ public class MemberModel {
     // variable for our id.
     private int id;
 
-    private String memberName, memberAgency, memberStatus, memberLink, memberID;
+    private String memberName, memberAgency, memberStatus, memberLink, memberID, memberImage;
 
 
     // below line we are creating constructor class.
     // inside constructor class we are not passing
     // our id because it is incrementing automatically
-    public MemberModel(int id,String memberName, String memberAgency, String memberStatus, String memberLink, String memberID) {
+    public MemberModel(int id,String memberName, String memberAgency, String memberStatus, String memberLink, String memberID, String memberImage) {
         this.id = id;
         this.memberName = memberName;
         this.memberAgency = memberAgency;
         this.memberStatus = memberStatus;
         this.memberLink = memberLink;
         this.memberID = memberID;
+        this.memberImage = memberImage;
     }
     @Ignore
-    public MemberModel(String memberName, String memberAgency, String memberStatus, String memberLink, String memberID) {
+    public MemberModel(String memberName, String memberAgency, String memberStatus, String memberLink, String memberID, String memberImage) {
         this.memberName = memberName;
         this.memberAgency = memberAgency;
         this.memberStatus = memberStatus;
         this.memberLink = memberLink;
         this.memberID = memberID;
+        this.memberImage = memberImage;
     }
 
     // on below line we are creating
@@ -58,6 +60,10 @@ public class MemberModel {
 
     public String getMemberID() {
         return memberID;
+    }
+
+    public String getMemberImage() {
+        return memberImage;
     }
 
     public int getId() {

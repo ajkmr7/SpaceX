@@ -30,12 +30,12 @@ public class ViewModel extends AndroidViewModel {
     }
 
     // below method is to delete all the courses in our list.
-    public void deleteAllCourses() {
+    public void deleteAllMembers() {
         repository.deleteAllMembers();
     }
 
     // below method is to get all the courses in our list.
-    public LiveData<List<MemberModel>> getAllCourses() {
+    public LiveData<List<MemberModel>> getAllMembers() {
         return allCourses;
     }
 }

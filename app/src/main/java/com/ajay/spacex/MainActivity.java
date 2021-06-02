@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,11 +38,14 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener {
-
-
+    MemberDatabase memberDatabase;
     ProgressDialog pd;
     ArrayList<JSONObject> jsonObjects = new ArrayList<JSONObject>();
+    ArrayList<JSONObject> crewMembers = new ArrayList<JSONObject>();
     RecyclerViewAdapter adapter;
+    MemberModel members;
+
+
     int flag = 0;
 
     public static boolean isNetworkOnline(Context con)
@@ -81,42 +85,96 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         recyclerView.setAdapter(adapter);
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MemberDatabase memberDatabase = MemberDatabase.getInstance(this);
+        memberDatabase = MemberDatabase.getInstance(this);
+        if(isNetworkOnline(MainActivity.this)){
+            findViewById(R.id.textView1).setVisibility(View.INVISIBLE);
+            new JsonTask().execute("https://api.spacexdata.com/v4/crew");
+        }
+        else{
+            memberDatabase.Dao().getAllMembers().observe(MainActivity.this,new Observer<List<MemberModel>>() {
 
+                @Override
+                public void onChanged(List<MemberModel> models) {
+                    // when the data is changed in our models we are
+                    // adding that list to our adapter class.
+
+                    if(models.toArray().length != 0){
+                        for(int i=0;i<models.toArray().length;i++){
+                            Log.d("QQQQ",models.get(i).getMemberName());
+
+                            String name = models.get(i).getMemberName();
+                            String agency = models.get(i).getMemberAgency();
+                            String status = models.get(i).getMemberStatus();
+                            String wikipedia = models.get(i).getMemberLink();
+                            String id = models.get(i).getMemberID();
+                            String image = models.get(i).getMemberImage();
+
+                            JSONObject member;
+                            try {
+                                member = new JSONObject("{\"name\":"+name+",\"agency\":"+agency+",\"status\":"+status+",\"wikipedia\":"+wikipedia+",\"id\":"+id+",\"image\":"+image+"}");
+                                jsonObjects.add(member);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        inflateLayout();
+                        findViewById(R.id.textView1).setVisibility(View.INVISIBLE);
+                    }
+                    else
+                        findViewById(R.id.textView1).setVisibility(View.VISIBLE);
+
+                }
+            });
+            Toast.makeText(MainActivity.this, "CHECK YOUR INTERNET CONNECTIVITY...", Toast.LENGTH_LONG).show();
+        }
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isNetworkOnline(MainActivity.this)){
                     findViewById(R.id.textView1).setVisibility(View.INVISIBLE);
                     new JsonTask().execute("https://api.spacexdata.com/v4/crew");
-                    Thread thread = new Thread() {
-                        @Override
-                        public void run() {
-                            MemberModel memberModel = new MemberModel("ABC","EFG","HIJ","LMN","OPQ");
-                            memberDatabase.Dao().insert(memberModel);
-                        }
-                    };
-                    thread.start();
-                    Log.d("ZZZ",memberDatabase.Dao().getAllMembers().toString());
                 }
                 else{
-                    Thread thread = new Thread() {
+                    memberDatabase.Dao().getAllMembers().observe(MainActivity.this,new Observer<List<MemberModel>>() {
                         @Override
-                        public void run() {
-                            if(memberDatabase.Dao().getAllMembers()!=null) {
+                        public void onChanged(List<MemberModel> models) {
+                            // when the data is changed in our models we are
+                            // adding that list to our adapter class.
+
+                            if(models.toArray().length != 0){
+                                for(int i=0;i<models.toArray().length;i++){
+                                    Log.d("QQQQ",models.get(i).getMemberName());
+
+                                    String name = models.get(i).getMemberName();
+                                    String agency = models.get(i).getMemberAgency();
+                                    String status = models.get(i).getMemberStatus();
+                                    String wikipedia = models.get(i).getMemberLink();
+                                    String id = models.get(i).getMemberID();
+                                    String image = models.get(i).getMemberImage();
+
+                                    JSONObject member;
+                                    try {
+                                        member = new JSONObject("{\"name\":\""+name+"\",\"agency\":\""+agency+"\",\"status\":\""+status+"\",\"wikipedia\":\""+wikipedia+"\",\"id\":\""+id+"\",\"image\":\""+image+"\"}");
+                                        jsonObjects.add(member);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                inflateLayout();
                                 findViewById(R.id.textView1).setVisibility(View.INVISIBLE);
                             }
-                            else{
+                            else
                                 findViewById(R.id.textView1).setVisibility(View.VISIBLE);
-                            }
+
                         }
-                    };
-                    thread.start();
+                    });
                     Toast.makeText(MainActivity.this, "CHECK YOUR INTERNET CONNECTIVITY...", Toast.LENGTH_LONG).show();
                 }
 
@@ -129,12 +187,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 Thread thread = new Thread() {
                     @Override
                     public void run() {
-                        MemberModel memberModel = new MemberModel("ABC","EFG","HIJ","LMN","OPQ");
                         memberDatabase.Dao().deleteAllMembers();
-                        Log.d("OOO",memberDatabase.Dao().getAllMembers().toString());
+
+//                        Log.d("OOO",memberDatabase.Dao().getAllMembers().toString());
                     }
                 };
                 thread.start();
+                jsonObjects = new ArrayList<JSONObject>();
+                inflateLayout();
             }
         });
 
@@ -186,10 +246,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 JSONObject jsonObject;
                 for(int i=0;i<uniObject.getJSONArray("res").length();i++){
                     jsonObject = uniObject.getJSONArray("res").getJSONObject(i);
-
+                    MemberModel memberModel = new MemberModel(jsonObject.getString("name"),jsonObject.getString("agency"),jsonObject.getString("status"),jsonObject.getString("wikipedia"), jsonObject.getString("id"), jsonObject.getString("image"));
+                    memberDatabase.Dao().insert(memberModel);
                     jsonObjects.add(jsonObject);
                 }
-                Log.d("ZZZ",jsonObjects.toString());
+
+//                Log.d("PPP",jsonObjects.toString());
 
                 return buffer.toString();
 

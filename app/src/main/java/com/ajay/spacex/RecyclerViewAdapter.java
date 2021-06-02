@@ -83,7 +83,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // total number of rows
     @Override
     public int getItemCount() {
-        return 17;
+        return crewMembers.toArray().length;
     }
 
 

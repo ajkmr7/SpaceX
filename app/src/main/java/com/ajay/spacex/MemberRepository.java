@@ -39,6 +39,7 @@ public class MemberRepository {
         return allMembers;
     }
 
+
     // we are creating a async task method to insert new course.
     private static class InsertCourseAsyncTask extends AsyncTask<MemberModel, Void, Void> {
         private Dao dao;
