@@ -16,6 +16,6 @@ Rest API docs - https://github.com/r-spacex/SpaceX-API/tree/master/docs/v4
 
 - [X] Display Member Name, Agency, Image, Wiki Hyperlink, Status
 
-- [ ] Store data in Room DB
+- [X] Store data in Room DB
 
-- [ ] Add buttons Refresh/Delete for the entire data in Room DB
+- [ ] Add buttons Refresh/Delete to manipulate data stored in RoomDB and display when user is offline
