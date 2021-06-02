@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="359" height="359" viewBox="0 0 359 359">
+  <defs>
+    <filter id="Rectangle_8" x="0" y="0" width="359" height="359" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_22" data-name="Group 22" transform="translate(-14.878 -568.956)">
+    <g transform="matrix(1, 0, 0, 1, 14.88, 568.96)" filter="url(#Rectangle_8)">
+      <rect id="Rectangle_8-2" data-name="Rectangle 8" width="341" height="341" transform="translate(9 6)" fill="#fff"/>
+    </g>
+    <g id="SpaceX_logo_black" transform="translate(90.42 730.667)">
+      <g id="Group_3" data-name="Group 3" transform="translate(0 10.833)">
+        <path id="Path_1" data-name="Path 1" d="M23.409,25.8H7.221V21.786H28.1c-.548-1.7-2.313-3.286-5.416-3.286H7.525c-3.469,0-5.477,1.278-5.477,4.078V25.56c0,2.434,2.069,3.834,5.112,3.834H23.531v4.26H1.5c.548,2.313,2.313,3.53,5.477,3.53H23.47c3.469,0,5.173-1.339,5.173-4.2V30c0-2.617-2.008-4.017-5.234-4.2Z" transform="translate(-1.5 -18.5)"/>
+      </g>
+      <g id="Group_4" data-name="Group 4" transform="translate(34.994 10.894)">
+        <path id="Path_2" data-name="Path 2" d="M78.962,18.6H59V37.284h5.66V30.1H79.388c4.078,0,6.329-1.4,6.329-4.686V23.347C85.656,20.3,83.1,18.6,78.962,18.6Zm1.826,5.964c0,1.339-.243,2.069-2.434,2.069H64.66l.061-4.869H78.11c2.434,0,2.739.73,2.739,2.008v.791Z" transform="translate(-59 -18.6)"/>
+      </g>
+      <g id="Group_5" data-name="Group 5" transform="translate(65.485 10.103)">
+        <path id="Path_3" data-name="Path 3" d="M121.759,17.3l-3.408,4.2,5.782,7.973h-12.05L109.1,32.637h17.406l2.982,4.138h6.695Z" transform="translate(-109.1 -17.3)"/>
+      </g>
+      <g id="Group_6" data-name="Group 6" transform="translate(97.679 10.833)">
+        <path id="Path_4" data-name="Path 4" d="M167.721,21.786H188.9c-.548-2.191-2.678-3.286-5.721-3.286H167.356c-2.739,0-5.356,1.1-5.356,4.078V33.045c0,2.982,2.617,4.078,5.356,4.078h16.006c3.652,0,4.93-1.035,5.538-3.53H167.721V21.786Z" transform="translate(-162 -18.5)"/>
+      </g>
+      <g id="Group_7" data-name="Group 7" transform="translate(132.308 10.894)">
+        <path id="Path_5" data-name="Path 5" d="M224.621,37.785V32.065H236V28.9H218.9V41.315h25.257v-3.53Z" transform="translate(-218.9 -22.631)"/>
+        <rect id="Rectangle_3" data-name="Rectangle 3" width="25.5" height="3.286" transform="translate(0.609)"/>
+      </g>
+      <g id="Group_8" data-name="Group 8" transform="translate(165.233 10.894)">
+        <path id="Path_6" data-name="Path 6" d="M281.885,18.6H273l10.468,7.668c1.521-1.035,3.286-2.13,4.869-3.043Zm12.9,9.555c-1.521,1.035-3.043,2.191-4.5,3.286l7.912,5.782h8.946l-12.354-9.068Z" transform="translate(-273 -18.6)"/>
+      </g>
+      <g id="Group_9" data-name="Group 9" transform="translate(164.625 0)">
+        <path id="Path_7" data-name="Path 7" d="M349.292.7C300.6,3.5,278.086,24.313,273.035,29.243L272,30.217h9.007C305.351,5.812,340.345,1.491,349.292.7Z" transform="translate(-272 -0.7)"/>
+      </g>
+    </g>
+  </g>
+</svg>
