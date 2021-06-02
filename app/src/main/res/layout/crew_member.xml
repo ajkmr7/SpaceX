@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="0dp"
+    android:layout_marginVertical="20dp"
+    android:padding="5dp"
+    android:alpha="0.6"
+    android:id="@+id/cardBackground"
+    android:elevation="5dp"
+    android:background="@drawable/member">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/name"
+            android:text="Name:"
+            android:textAllCaps="true"
+            android:fontFamily="@font/d_din"
+            android:textColor="@color/white"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:textSize="24sp"/>
+        <ImageView
+            android:scaleType="fitCenter"
+            android:layout_gravity="end"
+            android:elevation="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="8dp"
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:background="@drawable/rounded_corner"
+            android:layout_height="100dp"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/agency"
+        android:text="Name: "
+        android:textAllCaps="true"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/space_mono"
+        android:textColor="#FFFFFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/status"
+            android:text="Name: "
+            android:textAllCaps="true"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/space_mono"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"/>
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_height="10dp"
+            android:src="@drawable/ic_green_circle">
+        </ImageView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/wikipediaLink"
+        android:layout_margin="8dp"
+        android:text="Name: "
+        android:fontFamily="@font/space_mono"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/id"
+        android:text="Name: "
+        android:textAllCaps="true"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/space_mono"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"/>
+
+</LinearLayout>
