@@ -1,6 +1,7 @@
 package com.ajay.spacex;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 // below line is for setting table name.
@@ -20,6 +21,15 @@ public class MemberModel {
     // below line we are creating constructor class.
     // inside constructor class we are not passing
     // our id because it is incrementing automatically
+    public MemberModel(int id,String memberName, String memberAgency, String memberStatus, String memberLink, String memberID) {
+        this.id = id;
+        this.memberName = memberName;
+        this.memberAgency = memberAgency;
+        this.memberStatus = memberStatus;
+        this.memberLink = memberLink;
+        this.memberID = memberID;
+    }
+    @Ignore
     public MemberModel(String memberName, String memberAgency, String memberStatus, String memberLink, String memberID) {
         this.memberName = memberName;
         this.memberAgency = memberAgency;

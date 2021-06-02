@@ -2,6 +2,7 @@ package com.ajay.spacex;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -26,16 +27,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Member;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener {
 
+
     ProgressDialog pd;
-    Button button;
-    ArrayList<String> uniName, uniAgency, uniStatus, uniID,uniWiki;
     ArrayList<JSONObject> jsonObjects = new ArrayList<JSONObject>();
     RecyclerViewAdapter adapter;
     int flag = 0;
@@ -82,18 +86,55 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        MemberDatabase memberDatabase = MemberDatabase.getInstance(this);
+
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isNetworkOnline(MainActivity.this)){
                     findViewById(R.id.textView1).setVisibility(View.INVISIBLE);
                     new JsonTask().execute("https://api.spacexdata.com/v4/crew");
+                    Thread thread = new Thread() {
+                        @Override
+                        public void run() {
+                            MemberModel memberModel = new MemberModel("ABC","EFG","HIJ","LMN","OPQ");
+                            memberDatabase.Dao().insert(memberModel);
+                        }
+                    };
+                    thread.start();
+                    Log.d("ZZZ",memberDatabase.Dao().getAllMembers().toString());
                 }
                 else{
-
+                    Thread thread = new Thread() {
+                        @Override
+                        public void run() {
+                            if(memberDatabase.Dao().getAllMembers()!=null) {
+                                findViewById(R.id.textView1).setVisibility(View.INVISIBLE);
+                            }
+                            else{
+                                findViewById(R.id.textView1).setVisibility(View.VISIBLE);
+                            }
+                        }
+                    };
+                    thread.start();
                     Toast.makeText(MainActivity.this, "CHECK YOUR INTERNET CONNECTIVITY...", Toast.LENGTH_LONG).show();
                 }
 
+            }
+        });
+
+        findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Thread thread = new Thread() {
+                    @Override
+                    public void run() {
+                        MemberModel memberModel = new MemberModel("ABC","EFG","HIJ","LMN","OPQ");
+                        memberDatabase.Dao().deleteAllMembers();
+                        Log.d("OOO",memberDatabase.Dao().getAllMembers().toString());
+                    }
+                };
+                thread.start();
             }
         });
 
@@ -145,13 +186,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 JSONObject jsonObject;
                 for(int i=0;i<uniObject.getJSONArray("res").length();i++){
                     jsonObject = uniObject.getJSONArray("res").getJSONObject(i);
-//                    uniName.add(jsonObject.getString("name"));
-//                    uniAgency.add(jsonObject.getString("agency"));
-//                    uniStatus.add(jsonObject.getString("status"));
-//                    uniWiki.add(jsonObject.getString("wikipedia"));
-//                    uniID.add(jsonObject.getString("id"));
 
-                    Log.d("LLL",jsonObject.toString());
                     jsonObjects.add(jsonObject);
                 }
                 Log.d("ZZZ",jsonObjects.toString());
